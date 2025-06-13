@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { Beer, Trophy, Calendar, Users, Menu, X } from '@lucide/svelte';
+	import { m } from '$lib/paraglide/messages.js';
 
 	let { children } = $props();
 	let mobileMenuOpen = $state(false);
@@ -53,12 +54,16 @@
 							<span>{item.name}</span>
 						</a>
 					{/each}
-				</div>
-
-				<!-- User menu -->
+				</div>				<!-- User menu -->
 				<div class="hidden items-center space-x-4 md:flex">
-					<button class="btn variant-soft-primary"> Sign In </button>
-					<button class="btn variant-filled-primary"> Register </button>
+					{#if $page.data.user}
+						<form method="POST" action="/auth/logout">
+							<button class="btn variant-soft-primary">{m.nav_sign_out()}</button>
+						</form>
+					{:else}
+						<a href="/auth/login" class="btn variant-soft-primary">{m.nav_sign_in()}</a>
+						<a href="/auth/register" class="btn variant-filled-primary">{m.nav_register()}</a>
+					{/if}
 				</div>
 
 				<!-- Mobile menu button -->
@@ -96,11 +101,15 @@
 								<item.icon class="h-5 w-5" />
 							{/if}
 							<span>{item.name}</span>
-						</a>
-					{/each}
-					<div class="space-y-2 pt-4 pb-2">
-						<button class="btn variant-soft-primary w-full"> Sign In </button>
-						<button class="btn variant-filled-primary w-full"> Register </button>
+						</a>					{/each}					<div class="space-y-2 pt-4 pb-2">
+						{#if $page.data.user}
+							<form method="POST" action="/auth/logout">
+								<button class="btn variant-soft-primary w-full">{m.nav_sign_out()}</button>
+							</form>
+						{:else}
+							<a href="/auth/login" class="btn variant-soft-primary w-full">{m.nav_sign_in()}</a>
+							<a href="/auth/register" class="btn variant-filled-primary w-full">{m.nav_register()}</a>
+						{/if}
 					</div>
 				</div>
 			</div>
