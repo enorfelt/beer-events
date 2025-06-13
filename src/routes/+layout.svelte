@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { page } from '$app/stores';
+	import { enhance } from '$app/forms';
 	import { Beer, Trophy, Calendar, Users, Menu, X } from '@lucide/svelte';
 	import { m } from '$lib/paraglide/messages.js';
 
@@ -57,7 +58,7 @@
 				</div>				<!-- User menu -->
 				<div class="hidden items-center space-x-4 md:flex">
 					{#if $page.data.user}
-						<form method="POST" action="/auth/logout">
+						<form method="POST" action="/auth/logout" use:enhance>
 							<button class="btn variant-soft-primary">{m.nav_sign_out()}</button>
 						</form>
 					{:else}
@@ -103,7 +104,7 @@
 							<span>{item.name}</span>
 						</a>					{/each}					<div class="space-y-2 pt-4 pb-2">
 						{#if $page.data.user}
-							<form method="POST" action="/auth/logout">
+							<form method="POST" action="/auth/logout" use:enhance>
 								<button class="btn variant-soft-primary w-full">{m.nav_sign_out()}</button>
 							</form>
 						{:else}

@@ -61,20 +61,18 @@ export const actions: Actions = {
             return fail(400, {
                 message: 'Username is already taken'
             });
-        }
+        }        // Generate user ID
+        const userId = generateUserId();
+        
+        // Hash password
+        const passwordHash = await hash(password, {
+            memoryCost: 19456,
+            timeCost: 2,
+            outputLen: 32,
+            parallelism: 1
+        });
 
         try {
-            // Generate user ID
-            const userId = generateUserId();
-            
-            // Hash password
-            const passwordHash = await hash(password, {
-                memoryCost: 19456,
-                timeCost: 2,
-                outputLen: 32,
-                parallelism: 1
-            });
-
             // Create user in database
             await db.insert(table.user).values({
                 id: userId,
@@ -89,7 +87,7 @@ export const actions: Actions = {
             auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
 
             // Redirect to home page after successful registration
-            return redirect(302, '/');
+            return { success: true };
         } catch (error) {
             console.error('Registration error:', error);
             return fail(500, {

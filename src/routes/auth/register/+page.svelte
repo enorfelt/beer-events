@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import { User, Lock, Mail, UserPlus } from '@lucide/svelte';
 	import { m } from '$lib/paraglide/messages.js';
 	
@@ -24,9 +25,13 @@
 		<form method="POST" action="?/register" use:enhance={() => {
 			loading = true;
 			
-			return async ({ update }) => {
+			return async ({ result, update }) => {
 				loading = false;
 				await update();
+				
+				if (result.type === 'success' && result.data?.success) {
+					goto('/');
+				}
 			};
 		}} class="mt-8 space-y-6">
 			<div class="space-y-4 rounded-md shadow-sm">

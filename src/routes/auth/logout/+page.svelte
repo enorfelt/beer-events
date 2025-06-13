@@ -1,11 +1,14 @@
 <script lang="ts">
+    import { enhance } from '$app/forms';
+    import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
     import { m } from '$lib/paraglide/messages.js';
     import { LogOut } from '@lucide/svelte';
 
-    // This is a placeholder page for the server-side logout action
+    let loading = $state(true);
+
     onMount(() => {
-        // Automatically submit the form when the component mounts
+        // Auto-submit the form when the component mounts
         document.querySelector('form')?.submit();
     });
 </script>
@@ -21,8 +24,14 @@
         <div class="mt-4 flex justify-center">
             <div class="h-8 w-8 animate-spin rounded-full border-4 border-amber-200 border-t-amber-600"></div>
         </div>
-        <form method="POST" action="/auth/logout" class="hidden">
-            <!-- Hidden form that will be submitted by JavaScript -->
+        <form method="POST" action="?/default" use:enhance={() => {
+            return async ({ result }) => {
+                if (result.type === 'success') {
+                    goto('/');
+                }
+            };
+        }} class="hidden">
+            <!-- Hidden form that will be submitted automatically -->
         </form>
     </div>
 </div>
