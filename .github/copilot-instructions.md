@@ -4,6 +4,7 @@
 This is a SvelteKit web application for managing and displaying beer-related events. It features event listings, beer information, judging, leaderboards, and user authentication. The stack includes TypeScript, Drizzle ORM, Playwright, and Docker Compose.
 
 ## Key Technologies
+- bun (JavaScript runtime and package manager)
 - SvelteKit (frontend framework)
 - TypeScript (type safety)
 - Drizzle ORM (database access)
@@ -46,11 +47,13 @@ This is a SvelteKit web application for managing and displaying beer-related eve
 - Use Docker Compose for local development when needed.
 
 ## Common Scripts
-- `npm install` — Install dependencies
-- `npm run dev` — Start development server
-- `npm run test` or `npx playwright test` — Run tests
-- `npm run build` — Build for production
-- `docker-compose up` — Start full-stack environment
+- `bun install` — Install dependencies
+- `bun run dev` — Start development server
+- `bun run test` —  Run all tests
+- `bun run test:unit` - Run unit tests
+- `bun run test:e2e` - Run end-to-end tests
+- `bun run build` — Build for production
+- `bun run db:start` — Start database with podman compose up
 
 ## Contribution Tips
 - Write clear, concise commit messages.
