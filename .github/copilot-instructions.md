@@ -47,6 +47,13 @@ This is a SvelteKit web application for managing and displaying beer-related eve
 - Keep localization files updated in `messages/`.
 - Use Docker Compose for local development when needed.
 
+## Translations and localization Guidelines
+- Use Paraglide for managing translations.
+- Add new translations in the `messages/` directory.
+- Follow the naming convention for translation files: `en.json`, `sv.json`, etc.
+- Ensure all new strings are added to the appropriate translation files.
+- Run `bun run build` after updating translations to ensure they are included in the build.
+
 ## Common Scripts
 - `bun install` — Install dependencies
 - `bun run dev` — Start development server
