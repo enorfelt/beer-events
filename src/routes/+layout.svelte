@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { enhance } from '$app/forms';
 	import { Beer, Trophy, Calendar, Users, Menu, X } from '@lucide/svelte';
 	import { m } from '$lib/paraglide/messages.js';
@@ -45,7 +45,7 @@
 						<a
 							href={item.href}
 							class="flex items-center space-x-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200
-								{$page.url.pathname === item.href
+								{page.url.pathname === item.href
 								? 'bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200'
 								: 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'}"
 						>
@@ -57,7 +57,7 @@
 					{/each}
 				</div>				<!-- User menu -->
 				<div class="hidden items-center space-x-4 md:flex">
-					{#if $page.data.user}
+					{#if page.data.user}
 						<form method="POST" action="/auth/logout" use:enhance>
 							<button class="btn variant-soft-primary">{m.nav_sign_out()}</button>
 						</form>
@@ -93,7 +93,7 @@
 						<a
 							href={item.href}
 							class="flex items-center space-x-3 rounded-lg px-3 py-2 text-base font-medium transition-all duration-200
-								{$page.url.pathname === item.href
+								{page.url.pathname === item.href
 								? 'bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200'
 								: 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'}"
 							onclick={() => (mobileMenuOpen = false)}
@@ -103,7 +103,7 @@
 							{/if}
 							<span>{item.name}</span>
 						</a>					{/each}					<div class="space-y-2 pt-4 pb-2">
-						{#if $page.data.user}
+						{#if page.data.user}
 							<form method="POST" action="/auth/logout" use:enhance>
 								<button class="btn variant-soft-primary w-full">{m.nav_sign_out()}</button>
 							</form>
