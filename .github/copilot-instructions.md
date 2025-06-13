@@ -34,6 +34,7 @@ This is a SvelteKit web application for managing and displaying beer-related eve
 
 ## Copilot Usage Guidelines
 - Follow SvelteKit conventions for routing and file structure but also try to organize files in feature slices.
+- Use runes mode for SvelteKit to ensure proper type checking and autocompletion.
 - Organize code in a modular way and in feature slice directories.
 - Use TypeScript for all new code.
 - Write failing test first to follow TDD principles.
